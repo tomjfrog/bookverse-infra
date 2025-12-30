@@ -84,7 +84,7 @@ evd_create() {
       return 1
     fi
   else
-    
+    echo "Predicte file: $predicate_file"
     if ! jf evd create-evidence \
       --predicate "$predicate_file" \
       "${md_args[@]}" \
@@ -268,6 +268,10 @@ attach_application_slsa_evidence() {
   
   printf "# SLSA Provenance\n\nSupply chain provenance for %s v%s.\n" "$APPLICATION_KEY" "$APP_VERSION" > slsa-provenance.md
   printf "📋 Creating SLSA provenance evidence...\n"
+  print "slsa-provenance.json:"
+  cat slsa-provenance.json
+  print "slsa-provenance.md:"
+  cat slsa-provenance.md
   evd_create slsa-provenance.json "https://slsa.dev/provenance/v1" slsa-provenance.md                                                                           
 }
 
