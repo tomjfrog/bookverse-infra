@@ -268,7 +268,7 @@ attach_application_slsa_evidence() {
   
   printf "# SLSA Provenance\n\nSupply chain provenance for %s v%s.\n" "$APPLICATION_KEY" "$APP_VERSION" > slsa-provenance.md
   printf "📋 Creating SLSA provenance evidence...\n"
-  print "slsa-provenance.json:"
+  printf "slsa-provenance.json:"
   cat slsa-provenance.json
   print "slsa-provenance.md:"
   cat slsa-provenance.md
