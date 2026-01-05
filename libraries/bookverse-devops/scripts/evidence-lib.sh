@@ -270,7 +270,7 @@ attach_application_slsa_evidence() {
   printf "📋 Creating SLSA provenance evidence...\n"
   printf "slsa-provenance.json:"
   cat slsa-provenance.json
-  print "slsa-provenance.md:"
+  printf "slsa-provenance.md:"
   cat slsa-provenance.md
   evd_create slsa-provenance.json "https://slsa.dev/provenance/v1" slsa-provenance.md                                                                           
 }
