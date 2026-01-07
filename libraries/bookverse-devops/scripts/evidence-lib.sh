@@ -35,7 +35,7 @@ evd_create() {
   local predicate_file="${1:-}"; local predicate_type="${2:-}"; local markdown_file="${3:-}"
   local md_args=()
   if [[ -n "$markdown_file" ]]; then md_args+=(--markdown "$markdown_file"); fi
-  
+  echo "Attach to build: ${ATTACH_TO_BUILD}"
   if [[ "${ATTACH_TO_PACKAGE:-}" == "true" ]]; then
     local url_args=()
     if [[ -n "${JFROG_URL:-${JF_URL:-}}" ]]; then
