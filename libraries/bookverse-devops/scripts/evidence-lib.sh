@@ -35,7 +35,7 @@ evd_create() {
   local predicate_file="${1:-}"; local predicate_type="${2:-}"; local markdown_file="${3:-}"
   local md_args=()
   if [[ -n "$markdown_file" ]]; then md_args+=(--markdown "$markdown_file"); fi
-  echo "Attach to build: ${ATTACH_TO_BUILD}"
+
   if [[ "${ATTACH_TO_PACKAGE:-}" == "true" ]]; then
     local url_args=()
     if [[ -n "${JFROG_URL:-${JF_URL:-}}" ]]; then
@@ -85,12 +85,14 @@ evd_create() {
     fi
   else
     echo "Predicte file: $predicate_file"
+    # we need to reference evidence association via CLI command, not REST API.  This is a legacy feature.
+    # 
     if ! jf evd create-evidence \
       --predicate "$predicate_file" \
       "${md_args[@]}" \
       --predicate-type "$predicate_type" \
-      --release-bundle "${APPLICATION_KEY}" \
-      --release-bundle-version "${APP_VERSION}" \
+      --application-key "${APPLICATION_KEY}" \
+      --application-version "${APP_VERSION}" \
       --project "${PROJECT_KEY}" \
       --provider-id github-actions \
       --key "${EVIDENCE_PRIVATE_KEY:-}" \
