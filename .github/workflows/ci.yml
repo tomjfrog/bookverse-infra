@@ -266,7 +266,6 @@ jobs:
           JFROG_CLI_BUILD_NUMBER: ${{ env.BUILD_NUMBER }}
           JFROG_CLI_BUILD_PROJECT: ${{ vars.PROJECT_KEY }}
         with:
-          version: latest
           oidc-provider-name: bookverse-infra-github
           oidc-audience: ${{ vars.JFROG_URL }}
           disable-job-summary: false
