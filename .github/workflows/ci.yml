@@ -80,8 +80,8 @@ concurrency:
 # Optimized for continuous validation of shared libraries and foundational components
 on:
   # 📤 Push Events: Automatic validation when infrastructure code is updated on main branch
-  push:
-    branches: [main]
+  #push:
+  #  branches: [main]
 
   # 🔍 Pull Request Events: Comprehensive testing of proposed infrastructure changes
   # Ensures shared library quality and compatibility before merging into main branch
