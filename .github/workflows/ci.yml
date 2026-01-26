@@ -259,6 +259,8 @@ jobs:
 
       - name: "[Setup] Install and Configure JFrog CLI"
         uses: jfrog/setup-jfrog-cli@v4
+        with:
+          version: 2.88.0
         env:
           JF_URL: ${{ vars.JFROG_URL }}
           JF_PROJECT: ${{ vars.PROJECT_KEY }}
@@ -448,6 +450,8 @@ jobs:
 
       - name: "[Setup] Install and Configure JFrog CLI"
         uses: jfrog/setup-jfrog-cli@v4
+        with:
+          version: 2.88.0
         env:
           JF_URL: ${{ vars.JFROG_URL }}
           JF_PROJECT: ${{ vars.PROJECT_KEY }}
@@ -642,6 +646,8 @@ jobs:
 
       - name: "[Setup] JFrog CLI"
         uses: jfrog/setup-jfrog-cli@v4
+        with:
+          version: 2.88.0
         id: jfrog-cli-auth
         env:
           JF_URL: ${{ vars.JFROG_URL }}
