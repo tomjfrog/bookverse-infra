@@ -96,7 +96,7 @@ evd_create() {
       --provider-id github-actions \
       --key "${EVIDENCE_PRIVATE_KEY:-}" \
       --key-alias "${EVIDENCE_KEY_ALIAS:-${EVIDENCE_KEY_ALIAS_VAR:-}}"; then
-      echo "❌ Failed to attach evidence to release bundle ${APPLICATION_KEY}:${APP_VERSION}" >&2
+      echo "❌ Failed to attach evidence to Application Version ${APPLICATION_KEY}:${APP_VERSION}" >&2
       echo "🔍 Check EVIDENCE_PRIVATE_KEY and EVIDENCE_KEY_ALIAS configuration" >&2
       return 1
     fi
@@ -156,6 +156,7 @@ generate_random_values() {
 }
 
 process_template() {
+  echo "Processing template: $1 with output file: $2"
   local template_file="$1"
   local output_file="$2"
   
@@ -166,6 +167,8 @@ process_template() {
   
   envsubst < "$template_file" > "$output_file"
   echo "✅ Generated evidence: $output_file"
+  echo "Contents of $output_file:"
+  cat "$output_file"
 }
 
 attach_package_pytest_evidence() {
