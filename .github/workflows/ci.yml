@@ -80,8 +80,8 @@ concurrency:
 # Optimized for continuous validation of shared libraries and foundational components
 on:
   # 📤 Push Events: Automatic validation when infrastructure code is updated on main branch
-  #push:
-  #  branches: [main]
+  push:
+    branches: [main]
 
   # 🔍 Pull Request Events: Comprehensive testing of proposed infrastructure changes
   # Ensures shared library quality and compatibility before merging into main branch
@@ -940,6 +940,7 @@ jobs:
           echo "- **STAGING**: Promoted ✅ + Evidence (IaC scan, pentest, change approval)" >> $GITHUB_STEP_SUMMARY
           echo "- **PROD**: Promoted ✅ + Evidence (deployment verification)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
+          
           echo "### ✅ Deployment Status" >> $GITHUB_STEP_SUMMARY
           echo "- Infrastructure libraries available in JFrog Artifactory" >> $GITHUB_STEP_SUMMARY
           echo "- Services can consume bookverse-core and bookverse-devops libraries" >> $GITHUB_STEP_SUMMARY

@@ -156,7 +156,6 @@ generate_random_values() {
 }
 
 process_template() {
-  echo "Processing template: $1 with output file: $2"
   local template_file="$1"
   local output_file="$2"
   
@@ -167,8 +166,6 @@ process_template() {
   
   envsubst < "$template_file" > "$output_file"
   echo "✅ Generated evidence: $output_file"
-  echo "Contents of $output_file:"
-  cat "$output_file"
 }
 
 attach_package_pytest_evidence() {
@@ -272,10 +269,6 @@ attach_application_slsa_evidence() {
   
   printf "# SLSA Provenance\n\nSupply chain provenance for %s v%s.\n" "$APPLICATION_KEY" "$APP_VERSION" > slsa-provenance.md
   printf "📋 Creating SLSA provenance evidence...\n"
-  printf "slsa-provenance.json:"
-  cat slsa-provenance.json
-  printf "slsa-provenance.md:"
-  cat slsa-provenance.md
   evd_create slsa-provenance.json "https://slsa.dev/provenance/v1" slsa-provenance.md                                                                           
 }
 
