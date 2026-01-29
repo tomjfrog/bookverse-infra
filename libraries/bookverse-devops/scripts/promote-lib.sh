@@ -221,7 +221,7 @@ promote_to_stage() {
   # DO NOT CHANGE TO async=true - it causes "promotion already in progress" failures!
   if apptrust_post \
     "/apptrust/api/v1/applications/${APPLICATION_KEY}/versions/${APP_VERSION}/promote?async=false" \
-    "{\"target_stage\": \"${api_stage}\", \"promotion_type\": \"move\"}" \
+    "{\"target_stage\": \"${api_stage}\", \"promotion_type\": \"copy\"}" \
     "$resp_body"; then
     echo "HTTP OK"; cat "$resp_body" || true; echo
   else
