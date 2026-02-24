@@ -12,6 +12,10 @@ export BUILD_NAME="${BUILD_NAME:-${APPLICATION_KEY}_CI_build}"
 export BUILD_NUMBER="${BUILD_NUMBER:-1}"
 export APP_VERSION="${APP_VERSION:-1.0.0}"
 export COVERAGE_PERCENT="${COVERAGE_PERCENT:-85.0}"
+export PACKAGE_REPO_STAGE="${PACKAGE_REPO_STAGE:-DEV}"
+# Strip project prefix (e.g. bookverse-DEV -> DEV) for repo naming
+export PACKAGE_REPO_STAGE_SUFFIX="${PACKAGE_REPO_STAGE##*-}"
+export PACKAGE_REPO_STAGE_SUFFIX="${PACKAGE_REPO_STAGE_SUFFIX:-DEV}"
 
 export GITHUB_SHA="${GITHUB_SHA:-unknown}"
 export GITHUB_REF_NAME="${GITHUB_REF_NAME:-main}"
@@ -21,6 +25,7 @@ echo "📋 Evidence Library: Auto-configured environment variables"
 echo "  SERVICE_NAME: $SERVICE_NAME"
 echo "  APPLICATION_KEY: $APPLICATION_KEY"
 echo "  PROJECT_KEY: $PROJECT_KEY"
+echo "  PACKAGE_REPO_STAGE: $PACKAGE_REPO_STAGE (repo suffix: $PACKAGE_REPO_STAGE_SUFFIX)"
 echo "  BUILD_NAME: $BUILD_NAME"
 echo "  BUILD_NUMBER: $BUILD_NUMBER"
 echo "  APP_VERSION: $APP_VERSION"
@@ -44,9 +49,9 @@ evd_create() {
     
     local package_repo_name
     if [[ "${PACKAGE_NAME:-}" =~ \.(tar\.gz|zip|jar|war|tgz)$ ]] || [[ "${PACKAGE_NAME:-}" =~ ^(config|resources)$ ]]; then
-      package_repo_name="${PROJECT_KEY}-${SERVICE_NAME}-internal-generic-nonprod-local"
+      package_repo_name="${PROJECT_KEY}-${SERVICE_NAME}-internal-generic-${PACKAGE_REPO_STAGE_SUFFIX}-local"
     else
-      package_repo_name="${PROJECT_KEY}-${SERVICE_NAME}-internal-docker-nonprod-local"
+      package_repo_name="${PROJECT_KEY}-${SERVICE_NAME}-internal-docker-${PACKAGE_REPO_STAGE_SUFFIX}-local"
     fi
     if ! jf evd create-evidence \
       --predicate "$predicate_file" \
