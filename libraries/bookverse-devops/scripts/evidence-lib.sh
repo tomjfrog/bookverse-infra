@@ -47,11 +47,14 @@ evd_create() {
       url_args+=(--url "${JFROG_URL:-${JF_URL:-}}")
     fi
     
+    # Use lowercase stage suffix for repo keys (Docker requires lowercase in image paths; consistent naming)
+    local stage_lower
+    stage_lower=$(echo "${PACKAGE_REPO_STAGE_SUFFIX}" | tr '[:upper:]' '[:lower:]')
     local package_repo_name
     if [[ "${PACKAGE_NAME:-}" =~ \.(tar\.gz|zip|jar|war|tgz)$ ]] || [[ "${PACKAGE_NAME:-}" =~ ^(config|resources)$ ]]; then
-      package_repo_name="${PROJECT_KEY}-${SERVICE_NAME}-internal-generic-${PACKAGE_REPO_STAGE_SUFFIX}-local"
+      package_repo_name="${PROJECT_KEY}-${SERVICE_NAME}-internal-generic-${stage_lower}-local"
     else
-      package_repo_name="${PROJECT_KEY}-${SERVICE_NAME}-internal-docker-${PACKAGE_REPO_STAGE_SUFFIX}-local"
+      package_repo_name="${PROJECT_KEY}-${SERVICE_NAME}-internal-docker-${stage_lower}-local"
     fi
     if ! jf evd create-evidence \
       --predicate "$predicate_file" \

@@ -65,28 +65,29 @@ def stage_suffix_for_repo(stage: str) -> str:
     Extract the repo suffix from a stage name for repository key construction.
 
     Stage names may include a project prefix (e.g. "bookverse-DEV", "bookverse-QA").
-    This strips the prefix and returns the suffix used in repo names (e.g. "DEV", "QA").
+    This strips the prefix and returns the lowercase suffix used in repo names
+    (e.g. "dev", "qa"). Lowercase is required for Docker image paths.
 
     Args:
         stage: Stage name, e.g. "bookverse-DEV", "bookverse-QA", or "DEV"
 
     Returns:
-        Uppercase suffix for repo naming, e.g. "DEV", "QA". Defaults to "DEV" if empty.
+        Lowercase suffix for repo naming, e.g. "dev", "qa". Defaults to "dev" if empty.
 
     Examples:
         >>> stage_suffix_for_repo("bookverse-DEV")
-        'DEV'
+        'dev'
         >>> stage_suffix_for_repo("bookverse-QA")
-        'QA'
+        'qa'
         >>> stage_suffix_for_repo("DEV")
-        'DEV'
+        'dev'
     """
     s = (stage or "").strip()
     if not s:
-        return "DEV"
+        return "dev"
     if "-" in s:
-        return s.rsplit("-", 1)[-1].upper()
-    return s.upper()
+        return s.rsplit("-", 1)[-1].lower()
+    return s.lower()
 
 
 def parse_semver(v: str) -> Optional[Tuple[int, int, int]]:
