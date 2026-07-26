@@ -269,7 +269,6 @@ jobs:
           JFROG_CLI_BUILD_PROJECT: ${{ vars.PROJECT_KEY }}
         with:
           oidc-provider-name: bookverse-infra-github
-          oidc-audience: ${{ vars.JFROG_URL }}
           disable-job-summary: false
           disable-auto-build-publish: true
           disable-auto-evidence-collection: false
@@ -461,7 +460,6 @@ jobs:
         with:
           version: latest
           oidc-provider-name: bookverse-infra-github
-          oidc-audience: ${{ vars.JFROG_URL }}
           disable-job-summary: false
           disable-auto-build-publish: true
           disable-auto-evidence-collection: false
@@ -655,7 +653,6 @@ jobs:
         with:
           version: latest
           oidc-provider-name: bookverse-infra-github
-          oidc-audience: ${{ vars.JFROG_URL }}
           disable-job-summary: true
           disable-auto-build-publish: true
           disable-auto-evidence-collection: false
